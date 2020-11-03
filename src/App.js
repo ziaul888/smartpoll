@@ -20,7 +20,7 @@ export default class App extends Component {
      this.setState({polls:POLLS})
    }
  addNewPoll= poll =>{
- poll.id = shortid.generate(),
+ poll.id = shortid.generate()
  poll.created = new Date()
  poll.totalVote = 0
  poll.opinions=[]
@@ -50,12 +50,20 @@ updatePoll =updatedPoll =>{
 
   }
 
+  handleSearch =(searchTerm)=>{
+
+  }
+
   render() {
     return (
          <Container className="my-5">
            <Row>
              <Col md={4}>
-               <SideBar/>
+               <SideBar polls={this.state.polls}
+               searchTerm={this.state.searchTerm}
+               handleSearch={this.handleSearch}
+               selectedPoll={this.selectedPoll}
+               />
              </Col>
              <Col md={8}>
                <MainContent/>
