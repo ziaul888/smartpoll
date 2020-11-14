@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import shortid from 'shortid'
 import './App.css';
 import MainContent from './components/main-content'
@@ -50,6 +50,23 @@ updatePoll =updatedPoll =>{
 
   }
 
+  getOpinion=(respone)=>{
+     const {polls} =this.state
+     const poll =polls.find (p=>p.id ===respone.id)
+     const option = poll.opinions.find(o=>o.id === respone.selectedOption);
+     poll.totalVote++;
+     option.vote++;
+     const opinion = {
+       id : shortid.generate(),
+       name:respone.name,
+       selectedOption: respone.selectedOption
+     };
+     poll.opinions.push(opinion)
+     this.setState({
+       polls
+     })
+  }
+
   handleSearch =(searchTerm)=>{
 
   }
@@ -59,14 +76,20 @@ updatePoll =updatedPoll =>{
          <Container className="my-5">
            <Row>
              <Col md={4}>
-               <SideBar polls={this.state.polls}
+               <SideBar 
+               polls={this.state.polls}
                searchTerm={this.state.searchTerm}
                handleSearch={this.handleSearch}
                selectedPoll={this.selectedPoll}
+               addNewPoll={this.addNewPoll}
                />
              </Col>
              <Col md={8}>
-               <MainContent/>
+               <MainContent
+               poll={this.state.selectedPoll}
+               getOpinion={this.getOpinion}
+               deletePoll={this.deletePoll}
+               />              
              </Col>
            </Row>
          </Container>

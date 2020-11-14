@@ -14,7 +14,7 @@
          props.polls.map(poll=>(
            <ListGroupItem
            key={poll.id}
-           onClick={()=>props.selectPoll(poll.id)}
+           onClick={()=>props.selectedPoll(poll.id)}
            style ={{cursor:"pointer"}}>
                 {poll.title.length >39 ?poll.title.substr(0,30) +"...":poll.title}
 
