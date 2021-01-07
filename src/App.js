@@ -36,7 +36,7 @@ updatePoll =updatedPoll =>{
  const poll = polls.find(p=> p.id === updatedPoll.id)
  poll.title = updatedPoll.title
  poll.descrption= updatedPoll.descrption
- poll.opinions = updatedPoll.opinions
+ poll.opption = updatedPoll.opinions
 }
   deletePoll =pollId=> {
     const polls = this.state.polls.filter(p=> p.id !==pollId)
@@ -53,7 +53,7 @@ updatePoll =updatedPoll =>{
   getOpinion=(respone)=>{
      const {polls} =this.state
      const poll =polls.find (p=>p.id ===respone.id)
-     const option = poll.opinions.find(o=>o.id === respone.selectedOption);
+     const option = poll.options.find(o=>o.id === respone.selectedOption);
      poll.totalVote++;
      option.vote++;
      const opinion = {

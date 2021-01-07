@@ -14,7 +14,7 @@ const myform=({
     deleteOptions,
     handleSubmit
 })=>(
-   <Form onSubmit={handleSubmit}>
+   <Form onSubmit={ handleSubmit}>
        <FormGroup>
            <Label for= "title"> Title</Label>
            <Input

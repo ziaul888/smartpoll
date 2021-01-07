@@ -16,6 +16,17 @@ class PollForm extends Component {
         options:defaultOptions,
         errors: {}
     }
+
+    componentDidMount(){
+        const {poll} = this.props
+        if(poll && Object.keys(poll).length > 0){
+           this.setState({
+              title: poll.title,
+              description:poll.description,
+              options:poll.options
+           })  
+        }
+    }
        
  handleChange =(event)=>{
      this.setState({
@@ -56,29 +67,37 @@ class PollForm extends Component {
     }
     }
 
-    handleSubmit =(event)=>{
-    event.preventDefualt()
-   const {isValid, errors}= this.validate();
+    handleSubmit = event => {
+		event.preventDefault();
+		const { isValid, errors } = this.validate();
 
-    if(isValid){
-    const {title, description, options}= this.state;
-  
-    this.props.submit({
-        title,
-        description,
-        options
-    })
-    event.target.reset()
-    this.setState({
-        title:"",
-        description:"",
-        options:defaultOptions
-    })
-    }else{
-        this.setState({errors})
-}
+		if (isValid) {
+			const { title, description, options } = this.state;
+			const poll = {
+				title,
+				description,
+				options
+			};
 
-    }
+			if (this.props.isUpdate) {
+				poll.id = this.props.poll.id;
+				this.props.submit(poll);
+				alert('Updated Successfully');
+			} else {
+				this.props.submit(poll);
+				event.target.reset();
+				this.setState({
+					title: '',
+					description: '',
+					options: defaultOptions,
+					errors: {}
+				});
+			}
+		} else {
+			this.setState({ errors });
+		}
+	};
+
 
     validate = () => {
 		const errors = {};

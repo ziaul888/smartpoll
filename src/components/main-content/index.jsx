@@ -25,7 +25,7 @@ if ( Object.keys(this.props.poll).length === 0){
         </div>
     )
 }
-const { poll, getOption, updatePoll, deletePoll}= this.props
+const { poll, getOpinion, updatePoll, deletePoll}= this.props
         return (
             <div>
                 <h1>{poll.title}</h1>
@@ -33,7 +33,7 @@ const { poll, getOption, updatePoll, deletePoll}= this.props
                 <br></br>
                 <ParticipationForm
                 poll={poll}
-                getOption={getOption}
+                getOpinion={getOpinion}
                 toggleModal={this.toggleModal}
                 deletePoll={deletePoll}
                 />
